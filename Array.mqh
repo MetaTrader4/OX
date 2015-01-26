@@ -1,2 +1,0 @@
-
-#include "Array\System.mqh"

@@ -1,4 +1,6 @@
 
+// Author: Kolier.Li
+
 #include <Object.mqh>
 #include "..\Order\Order.mqh"
 #include "..\Array\System.mqh"
@@ -42,6 +44,8 @@ class OrderJar : public CObject
  */
 int OrderJar::collect(void)
 {
+    // Reset
+    destroy();
     ArrayResize(tickets, 0);
     ArrayInitialize(info, 0);
     total = 0;

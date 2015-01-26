@@ -1,4 +1,6 @@
 
+// Author: Kolier.Li
+
 #include "..\System.mqh"
 #include "..\Trade\System.mqh"
 #include <Object.mqh>
