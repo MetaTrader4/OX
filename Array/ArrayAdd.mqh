@@ -1,4 +1,6 @@
 
+// Author: Kolier.Li
+
 #include "ArrayHas.mqh"
 #include "ArrayInsert.mqh"
 

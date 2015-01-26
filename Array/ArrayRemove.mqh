@@ -1,4 +1,6 @@
 
+// Author: Kolier.Li
+
 #include "ArrayDelete.mqh"
 
 // Difference from ArrayDelete(): Remove the value by 'value' instead of 'index'.

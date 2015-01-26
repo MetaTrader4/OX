@@ -1,4 +1,6 @@
 
+// Author: Kolier.Li
+
 /**
  * Combine an array into string.
  */

@@ -1,4 +1,6 @@
 
+// Author: Kolier.Li
+
 /**
  * Array Clone.
  */

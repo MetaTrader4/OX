@@ -1,3 +1,6 @@
+
+// Author: Kolier.Li
+
 /**
  * Clear objects with prefix or suffix.
  */

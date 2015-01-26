@@ -1,4 +1,6 @@
 
+// Author: Kolier.Li
+
 /**
  * Convert string into datetime, a wrapper for StringToTime().
  */

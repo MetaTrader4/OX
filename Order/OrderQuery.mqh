@@ -1,4 +1,6 @@
 
+// Author: Kolier.Li
+
 struct OrderQueryParam
 {
     int info;

@@ -1,4 +1,6 @@
 
+// Author: Kolier.Li
+
 #include "Task.mqh"
 #include "Custom\TaskType.mqh"
 #include "..\Data\GV.mqh"

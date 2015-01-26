@@ -1,4 +1,6 @@
 
+// Author: Kolier.Li
+
 /**
  * Get fractional part of a number.
  *

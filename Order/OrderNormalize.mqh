@@ -1,4 +1,6 @@
 
+// Author: Kolier.Li
+
 #include "..\Order\System.mqh"
 #include "..\Market\System.mqh"
 

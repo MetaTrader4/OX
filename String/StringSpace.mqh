@@ -1,4 +1,6 @@
 
+// Author: Kolier.Li
+
 /**
  * Fill string with empty space to the right.
  */
