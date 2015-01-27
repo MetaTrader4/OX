@@ -28,7 +28,7 @@ struct Message
         /**
          * Send
          */
-        bool send(void)
+        bool sendAll(void)
         {
             return sendMail() && sendNotification();
         }
@@ -40,6 +40,22 @@ struct Message
         
         bool sendNotification(void)
         {
-            return SendNotification(body);
+            return SendNotification(title + " ===> " + body);
+        }
+        
+        void sendPrint(void)
+        {
+            Print(title);
+            Print(body);
+        }
+        
+        void sendAlert(void)
+        {
+            Alert(title);
+        }
+        
+        void sendBox(void)
+        {
+            MessageBox(body, title, MB_OK);
         }
 };

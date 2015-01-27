@@ -91,6 +91,7 @@ struct Entry
             }
             else {
                 Print("OrderOpen(" + IntegerToString(GetLastError()) + "): Fail to open new order.");
+                Print(sym, " ", cmd, " ", lots, " ", po, " ", slippage, " ", psl, " ", ptp, " ", cmt, " ", magic, " ", expire);
             }
             
             return ticket;
