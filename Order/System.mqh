@@ -51,6 +51,17 @@ double OrderLots(int ticket)
     return NULL;
 }
 
+/**
+ * Overload: OrderCloseTime().
+ */
+datetime OrderCloseTime(int ticket)
+{
+    if (OrderSelectA(ticket)) {
+        return OrderCloseTime();
+    }
+    return NULL;
+}
+
 // =============================================================================
 // Extend
 

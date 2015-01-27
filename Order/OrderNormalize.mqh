@@ -31,7 +31,17 @@ double OrderNormalizePrice(int ticket, double price)
 double OrderNormalizeLots(string sym, double lots)
 {
     double lotstep = MarketInfo(sym, MODE_LOTSTEP);
-    return MathRound(lots / lotstep) * lotstep;
+    double lots_now = MathRound(lots / lotstep) * lotstep;
+    double lots_min = MarketInfo(Symbol(), MODE_MINLOT);
+    double lots_max = MarketInfo(Symbol(), MODE_MAXLOT);
+    if (lots_now < lots_min) {
+        lots_now = lots_min;
+    }
+    if (lots_now > lots_max) {
+        lots_now = lots_max;
+    }
+    
+    return lots_now;
 }
 
 double OrderNormalizeLots(int ticket, double lots)
