@@ -10,13 +10,16 @@
 struct DataSerial
 {
     public:
-        int m_size; // Default data size
-        datetime m_time; // Data timestamp
+        int data_size; // Default data size
+        datetime data_time; // Data timestamp
     public:
-        void initiate(int &i_data[]); // Initiate data
+        // Initiate data array
+        void initiate(int &i_data[]);
         void initiate(double &i_data[]);
-        void add(int &i_data[], int i_val); // Add new data value
+        // Add new data value
+        void add(int &i_data[], int i_val);
         void add(double &i_data[], double i_val);
+        // Check Cross
         ENUM_CROSSOVER crossStatus(int &i_data[], int i_val, int i_idx = 0); // Test if data serial crossed a being tested value
         ENUM_CROSSOVER crossStatus(double &i_data[], double i_val, int i_idx = 0);
         ENUM_CROSSOVER crossStatusStrict(int &i_data[], int i_val, int i_idx = 0); // >, < only, not all =
@@ -30,13 +33,13 @@ struct DataSerial
  */
 void DataSerial::initiate(int &i_data[])
 {
-    ArrayResize(i_data, m_size);
+    ArrayResize(i_data, data_size);
     ArrayInitialize(i_data, EMPTY_VALUE);
 }
 
 void DataSerial::initiate(double &i_data[])
 {
-    ArrayResize(i_data, m_size);
+    ArrayResize(i_data, data_size);
     ArrayInitialize(i_data, EMPTY_VALUE);
 }
 
