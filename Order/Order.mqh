@@ -2,6 +2,7 @@
 // Author: Kolier.Li
 
 #include "..\System.mqh"
+#include "..\Compare.mqh"
 #include "..\Trade\System.mqh"
 #include <Object.mqh>
 #include "System.mqh"
@@ -31,6 +32,8 @@ class Order : public CObject
         datetime dtc;    // Close time, 0 if opening, > 0 for closed
         string   sym;    // Symbol()
         string   cmt;    // NULL/""
+        // Basic
+        int digits; // Price digits
         // Value Extend
         ENUM_TRADE_DIR  tdir;       // Trade direction
         ENUM_TRADE_MODE tmode;      // Trade mode
@@ -62,7 +65,7 @@ class Order : public CObject
         // Value
         int vTicket(void) { return ticket; }
         int vType(void) { select(); return cmd = OrderType(); }
-        int vMagicNumber(void) { return magic; }
+        int vMagicNumber(void) { select(); return magic = OrderMagicNumber(); }
         datetime vExpiration(void) { select(); return dte = OrderExpiration(); }
         datetime vOpenTime(void) { select(); return dto = OrderOpenTime(); }
         datetime vCloseTime(void) { select(); return dtc = OrderCloseTime(); }
@@ -74,8 +77,10 @@ class Order : public CObject
         double vTakeProfit(void) { select(); return ptp = OrderTakeProfit(); }
         double vStopLoss(void) { select(); return psl = OrderStopLoss(); }
         double vClosePrice(void) { select(); return pc = OrderClosePrice(); }
-        string vSymbol(void) { return sym; }
+        string vSymbol(void) { select(); return sym = OrderSymbol(); }
         string vComment(void) { select(); return cmt = OrderComment(); }
+        // Basic
+        int vDigits(void) { return digits = MarketDigits(vSymbol()); }
         // Value Extend
         ENUM_TRADE_DIR vTradeDir(void) { return tdir = OrderTradeDir(ticket); }
         ENUM_TRADE_MODE vTradeMode(void) { return tmode = OrderTradeMode(ticket); }
@@ -197,7 +202,7 @@ bool Order::modify(double i_ptp, double i_psl)
     double ptp_new = OrderNormalizePrice(ticket, i_ptp);
     double psl_new = OrderNormalizePrice(ticket, i_psl); 
     
-    if (ptp_new != ptp || psl_new != psl) {
+    if (!Compare(ptp, ptp_new, digits) || !Compare(psl_new, psl, digits)) {
         return OrderModify(ticket, po, psl_new, ptp_new, dte, clr_mod);
     }
     return false;
@@ -209,7 +214,7 @@ bool Order::modifyTP(double i_ptp)
     if (dtc > 0) return(false);
     double ptp_new = OrderNormalizePrice(ticket, i_ptp);
     
-    if (ptp_new != ptp) {
+    if (!Compare(ptp, ptp_new, digits)) {
         return OrderModify(ticket, po, psl, ptp_new, dte, clr_mod);
     }
     return false;
@@ -221,7 +226,7 @@ bool Order::modifySL(double i_psl)
     if (dtc > 0) return(false);
     double psl_new = OrderNormalizePrice(ticket, i_psl);
     
-    if (psl_new != psl) {
+    if (!Compare(psl_new, psl, digits)) {
         return OrderModify(ticket, po, psl_new, ptp, dte, clr_mod);
     }
     return false;
