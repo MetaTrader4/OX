@@ -12,8 +12,8 @@ struct DataSerialPriceTicks : public DataSerial
     public:
         DataSerialPriceTicks(string i_sym = NULL, int i_size = 100)
         {
-            m_sym = i_sym;
-            m_size = i_size;
+            sym = i_sym;
+            data_size = i_size;
             initiate(data_ask);
             initiate(data_bid);
         }
@@ -26,13 +26,13 @@ struct DataSerialPriceTicks : public DataSerial
             MqlTick tick;
             SymbolInfoTick(sym, tick);
             // Ignore same tick
-            if (tick.time == m_time) return;
+            if (tick.time == data_time) return;
             
             add(data_ask, tick.ask);
             add(data_bid, tick.bid);
             
             // Update data time
-            m_time = tick.time;
+            data_time = tick.time;
         }
         
         /**
