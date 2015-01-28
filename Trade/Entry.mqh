@@ -85,7 +85,7 @@ struct Entry
             if (ticket > 0) {
                 if (ptp > 0 || psl > 0) {
                     if (!OrderModify(ticket, po, psl, ptp, expire, clr)) {
-                        Print("OrderOpen(" + IntegerToString(GetLastError()) + "): Fail to modify order after opened.");
+                        if (GetLastError() > 1) Print("OrderOpen(" + IntegerToString(GetLastError()) + "): Fail to modify order after opened.");
                     }
                 }
             }
