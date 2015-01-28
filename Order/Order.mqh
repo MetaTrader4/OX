@@ -187,26 +187,35 @@ bool Order::close(void)
 bool Order::modify(double i_ptp, double i_psl)
 {
     update();
-    ptp = OrderNormalizePrice(ticket, i_ptp);
-    psl = OrderNormalizePrice(ticket, i_psl);
+    double ptp_new = OrderNormalizePrice(ticket, i_ptp);
+    double psl_new = OrderNormalizePrice(ticket, i_psl); 
     
-    return OrderModify(ticket, po, psl, ptp, dte, clr_mod);
+    if (ptp_new != ptp || psl_new != psl) {
+        return OrderModify(ticket, po, psl_new, ptp_new, dte, clr_mod);
+    }
+    return false;
 }
 
 bool Order::modifyTP(double i_ptp)
 {
     update();
-    ptp = OrderNormalizePrice(ticket, i_ptp);
+    double ptp_new = OrderNormalizePrice(ticket, i_ptp);
     
-    return OrderModify(ticket, po, psl, ptp, dte, clr_mod);
+    if (ptp_new != ptp) {
+        return OrderModify(ticket, po, psl, ptp, dte, clr_mod);
+    }
+    return false;
 }
 
 bool Order::modifySL(double i_psl)
 {
     update();
-    psl = OrderNormalizePrice(ticket, i_psl);
+    double psl_new = OrderNormalizePrice(ticket, i_psl);
     
-    return OrderModify(ticket, po, psl, ptp, dte, clr_mod);
+    if (psl_new != psl) {
+        return OrderModify(ticket, po, psl, ptp, dte, clr_mod);
+    }
+    return false;
 }
 
 // =============================================================================
