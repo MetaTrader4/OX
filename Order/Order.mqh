@@ -45,11 +45,17 @@ class Order : public CObject
         int   slippage;  // Order operation slippage.        
     public:
         // Core
-        Order(void): ticket(NULL) {}
-        Order(const int i_ticket, bool i_init = FALSE): ticket(i_ticket) {
+        Order(void): ticket(NULL)
+        {
             clr_mod = clrNONE;
             clr_close = clrWhite;
-            slippage = 3;
+            slippage = 10;
+        }
+        Order(const int i_ticket, bool i_init = FALSE): ticket(i_ticket)
+        {
+            clr_mod = clrNONE;
+            clr_close = clrWhite;
+            slippage = 10;
             if (i_init) update();
         }
         ~Order(void) {}
@@ -187,6 +193,7 @@ bool Order::close(void)
 bool Order::modify(double i_ptp, double i_psl)
 {
     update();
+    if (dtc > 0) return(false);
     double ptp_new = OrderNormalizePrice(ticket, i_ptp);
     double psl_new = OrderNormalizePrice(ticket, i_psl); 
     
@@ -199,10 +206,11 @@ bool Order::modify(double i_ptp, double i_psl)
 bool Order::modifyTP(double i_ptp)
 {
     update();
+    if (dtc > 0) return(false);
     double ptp_new = OrderNormalizePrice(ticket, i_ptp);
     
     if (ptp_new != ptp) {
-        return OrderModify(ticket, po, psl, ptp, dte, clr_mod);
+        return OrderModify(ticket, po, psl, ptp_new, dte, clr_mod);
     }
     return false;
 }
@@ -210,10 +218,11 @@ bool Order::modifyTP(double i_ptp)
 bool Order::modifySL(double i_psl)
 {
     update();
+    if (dtc > 0) return(false);
     double psl_new = OrderNormalizePrice(ticket, i_psl);
     
     if (psl_new != psl) {
-        return OrderModify(ticket, po, psl, ptp, dte, clr_mod);
+        return OrderModify(ticket, po, psl_new, ptp, dte, clr_mod);
     }
     return false;
 }
