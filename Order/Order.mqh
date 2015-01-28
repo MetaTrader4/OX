@@ -156,6 +156,9 @@ bool Order::update(void)
     sym = OrderSymbol();
     cmt = OrderComment();
     
+    // Value Basic
+    vDigits();
+    
     // Value Extend
     vTradeDir();
     vTradeMode();
