@@ -1,0 +1,4 @@
+                OX - Core of KO MQL4 Coding Framework
+
+This project is free to personal usage.
+For commercial usage, contact Kolier.Li(kolier.li@gmail.com) to get a proper license.
