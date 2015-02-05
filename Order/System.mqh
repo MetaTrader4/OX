@@ -120,6 +120,44 @@ ENUM_TRADE_MODE OrderTradeMode(int value, bool is_ticket = TRUE)
 }
 
 /**
+ * Get Order open cmd from dir.
+ */
+int OrderCmd(string sym, ENUM_TRADE_DIR dir, double po)
+{
+    int cmd = -1;
+    double price = OrderPrice(sym, dir, 1);
+    double spread = MarketInfo(sym, MODE_SPREAD) * MarketInfo(sym, MODE_TICKSIZE);
+    if (dir == LONG) {
+        if (MathAbs(po - price) <= spread) {
+            cmd = OP_BUY;
+        }
+        else {
+            if (po > price) {
+                cmd = OP_BUYSTOP;
+            }
+            else {
+                cmd = OP_BUYLIMIT;
+            }
+        }
+    }
+    else if (dir == SHORT) {
+        if (MathAbs(po - price) <= spread) {
+            cmd = OP_SELL;
+        }
+        else {
+            if (po < price) {
+                cmd = OP_SELLSTOP;
+            }
+            else {
+                cmd = OP_SELLLIMIT;
+            }
+        }
+    }
+    
+    return cmd;
+}
+
+/**
  * Get the corresponding price.
  *
  * @param mode -1 = price to close, 1 = price to open.

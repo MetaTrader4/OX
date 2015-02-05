@@ -22,7 +22,7 @@ void DrawClear(string prefix = "", string suffix = "")
 /**
  * Set Object Label, create if not exist yet.
  */
-void fxDrawLabel(string name, string text, int corner, int x, int y, int window = 0, color clr = clrWhite, string font = "Arial", int font_size = 12)
+void DrawLabel(string name, string text, int corner, int x, int y, int window = 0, color clr = clrWhite, string font = "Arial", int font_size = 12)
 {
     if(ObjectFind(name) == -1) {
         ObjectCreate(name, OBJ_LABEL, window, 0, 0);
