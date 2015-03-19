@@ -12,7 +12,7 @@ int ArrayAdd(int &arr[], int value)
     if (!ArrayHas(arr, value)) {
         return ArrayInsert(arr, value);
     }
-    return NULL;
+    return ArraySize(arr);
 }
 
 int ArrayAdd(double &arr[], double value)
@@ -20,7 +20,7 @@ int ArrayAdd(double &arr[], double value)
     if (!ArrayHas(arr, value)) {
         return ArrayInsert(arr, value);
     }
-    return NULL;
+    return ArraySize(arr);
 }
 
 int ArrayAdd(string &arr[], string value)
@@ -28,5 +28,5 @@ int ArrayAdd(string &arr[], string value)
     if (!ArrayHas(arr, value)) {
         return ArrayInsert(arr, value);
     }
-    return NULL;
+    return ArraySize(arr);
 }
